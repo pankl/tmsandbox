@@ -2,17 +2,23 @@
 import urllib2
 import json
 import unittest
+import ConfigParser
 
 
 class TestByCategoryId(unittest.TestCase):
 
     def setUp(self):
         """This is the initializer of the test, all the hardcoded test values going into here"""
-        self.url = "https://api.tmsandbox.co.nz/v1/Categories/6327/Details.json?catalogue=false"
-        self.nameToAssert = "Carbon credits"
-        self.canRelist = True
-        self.promotionName = "Gallery"
-        self.promotionDescription = "2x larger image"
+        configParser = ConfigParser.ConfigParser()
+        try:
+            configParser.read('../Config/TestByCategoryId.ini')
+        except Exception as e:
+            self.fail("Failed reading test configuration file.\n{0}".format(e))
+        self.url = configParser.get('6327', 'Url')
+        self.nameToAssert = configParser.get('6327', 'Name')
+        self.canRelist = configParser.get('6327', 'CanRelist')
+        self.promotionName = configParser.get('6327', 'PromotionName')
+        self.promotionDescription = configParser.get('6327', 'PromotionDescription')
 
     def send_get_request(self,url):
         try:
