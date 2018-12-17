@@ -10,6 +10,8 @@ Acceptance Criteria:
 Name = "Carbon credits"
 CanRelist = true
 The Promotions element with Name = "Gallery" has a Description that contains the text "2x larger image"
+Assuming there's up to one promotion with name "Gallery", if there's more than one the assertion will be made on the first one.
+
 
 I chose to use python as it's powerful but yet very lightweight and easy to prototype with it.
 
